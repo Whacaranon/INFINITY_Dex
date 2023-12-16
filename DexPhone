@@ -11012,24 +11012,6 @@ Main = (function()
 		Lib.ShowGui(gui)
 	end
 
-Main.CreateApp({Name = "Copy part to select", IconMap = Main.LargeIcons, Icon = 6, OnClick = function(callback)
-			if callback then
-				local mouse = Main.Mouse
-				cptsOnMouseClick = mouse.Button1Down:Connect(function()
-					pcall(function()
-						local object = mouse.Target
-						if nodes[object] then
-							selection:Set(nodes[object])
-							Explorer.ViewNode(nodes[object])
-						end
-					end)
-				end)
-			else if cptsOnMouseClick ~= nil then cptsOnMouseClick:Disconnect() cptsOnMouseClick = nil end end
-		end})
-		
-		Lib.ShowGui(gui)
-	end
-	
 	Main.SetupFilesystem = function()
 		if not env.writefile or not env.makefolder then return end
 		local writefile, makefolder = env.writefile, env.makefolder
