@@ -11009,7 +11009,7 @@ Main = (function()
 			else if cptsOnMouseClick ~= nil then cptsOnMouseClick:Disconnect() cptsOnMouseClick = nil end end
 		end})
 		
-Main.CreateApp({Name = "Copy Part", IconMap = Main.LargeIcons, Icon = 4, OnClick = function(callback)
+Main.CreateApp({Name = "Copy Part", IconMap = Main.LargeIcons, Icon = 6, OnClick = function(callback)
 if callback then
 local sList = selection.List
 			if #sList == 1 then
@@ -11027,6 +11027,7 @@ local sList = selection.List
 				resList[count] = "}"
 				env.setclipboard(table.concat(resList,"\n"))
 			end
+end})
 
 		Lib.ShowGui(gui)
 	end
