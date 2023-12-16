@@ -11009,6 +11009,8 @@ Main = (function()
 			else if cptsOnMouseClick ~= nil then cptsOnMouseClick:Disconnect() cptsOnMouseClick = nil end end
 		end})
 		
+Main.CreateApp({Name = "Copy Part", IconMap = Main.LargeIcons, Icon = "Script_Viewer", Window = ScriptViewer.Window})
+
 		Lib.ShowGui(gui)
 	end
 
