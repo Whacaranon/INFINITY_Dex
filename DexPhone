@@ -912,7 +912,7 @@ local function main()
 			context:AddRegistered("HIDE_NIL")
 		end
 
-		Explorer.LastLeftClickX, Explorer.LastLeftClickY = Main.Mouse.X, Main.Mouse.Y
+		Explorer.LastLeftClickX, Explorer.LastLeftClickY = Main.mouse.Button1Down
 		context:Show()
 	end
 
