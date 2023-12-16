@@ -11009,7 +11009,7 @@ Main = (function()
 			else if cptsOnMouseClick ~= nil then cptsOnMouseClick:Disconnect() cptsOnMouseClick = nil end end
 		end})
 		
-Main.CreateApp({Name = "Copy Part", IconMap = Main.LargeIcons, Icon = "Script_Viewer", OnClick = function(callback)
+Main.CreateApp({Name = "Copy Part", IconMap = Main.LargeIcons, Icon = 6, OnClick = function(callback)
 if callback then
 local sList = selection.List
 			if #sList == 1 then
