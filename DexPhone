@@ -847,8 +847,8 @@ local function main()
 		end
 	end
 
-	Explorer.ShowRightClick = function()
-		local context = Explorer.RightClickContext
+	Explorer.ShowLeftClick = function()
+		local context = Explorer.LeftClickContext
 		context:Clear()
 
 		local sList = selection.List
@@ -916,7 +916,7 @@ local function main()
 		context:Show()
 	end
 
-	Explorer.InitRightClick = function()
+	Explorer.InitLeftClick = function()
 		local context = Lib.ContextMenu.new()
 
 		context:Register("CUT",{Name = "Cut", IconMap = Explorer.MiscIcons, Icon = "Cut", DisabledIcon = "Cut_Disabled", Shortcut = "Ctrl+Z", OnClick = function()
@@ -1318,7 +1318,7 @@ local function main()
 			Explorer.HideNilInstances()
 		end})
 
-		Explorer.RightClickContext = context
+		Explorer.LeftClickContext = context
 	end
 
 	Explorer.HideNilInstances = function()
@@ -2136,7 +2136,7 @@ return search]==]
 		selection.Changed:Connect(Properties.ShowExplorerProps)
 		Explorer.Selection = selection
 
-		Explorer.InitRightClick()
+		Explorer.InitLeftClick()
 		Explorer.InitInsertObject()
 		Explorer.SetSortingEnabled(Settings.Explorer.Sorting)
 		Explorer.Expanded = setmetatable({},{__mode = "k"})
