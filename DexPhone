@@ -5149,14 +5149,14 @@ local function main()
 			--local thumbSelectColor = Color3.new(140/255,140/255,140/255)
 			button1.InputBegan:Connect(function(input)
 				if input.UserInputType == Enum.UserInputType.MouseMovement and not buttonPress and self:CanScrollUp() then button1.BackgroundTransparency = 0.8 end
-				if input.UserInputType ~= Enum.UserInputType.MouseButton1Click or not self:CanScrollUp() then return end
+				if input.UserInputType ~= Enum.UserInputType.MouseButton1 or not self:CanScrollUp() then return end
 				buttonPress = true
 				button1.BackgroundTransparency = 0.5
 				if self:CanScrollUp() then self:ScrollUp() self.Scrolled:Fire() end
 				local buttonTick = tick()
 				local releaseEvent
 				releaseEvent = user.InputEnded:Connect(function(input)
-					if input.UserInputType ~= Enum.UserInputType.MouseButton1Click then return end
+					if input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
 					releaseEvent:Disconnect()
 					if checkMouseInGui(button1) and self:CanScrollUp() then button1.BackgroundTransparency = 0.8 else button1.BackgroundTransparency = 1 end
 					buttonPress = false
@@ -5174,14 +5174,14 @@ local function main()
 			end)
 			button2.InputBegan:Connect(function(input)
 				if input.UserInputType == Enum.UserInputType.MouseMovement and not buttonPress and self:CanScrollDown() then button2.BackgroundTransparency = 0.8 end
-				if input.UserInputType ~= Enum.UserInputType.MouseButton1Click or not self:CanScrollDown() then return end
+				if input.UserInputType ~= Enum.UserInputType.MouseButton1 or not self:CanScrollDown() then return end
 				buttonPress = true
 				button2.BackgroundTransparency = 0.5
 				if self:CanScrollDown() then self:ScrollDown() self.Scrolled:Fire() end
 				local buttonTick = tick()
 				local releaseEvent
 				releaseEvent = user.InputEnded:Connect(function(input)
-					if input.UserInputType ~= Enum.UserInputType.MouseButton1Click then return end
+					if input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
 					releaseEvent:Disconnect()
 					if checkMouseInGui(button2) and self:CanScrollDown() then button2.BackgroundTransparency = 0.8 else button2.BackgroundTransparency = 1 end
 					buttonPress = false
@@ -5214,7 +5214,7 @@ local function main()
 				local releaseEvent
 				local mouseEvent
 				releaseEvent = user.InputEnded:Connect(function(input)
-					if input.UserInputType ~= Enum.UserInputType.MouseButton1Click then return end
+					if input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
 					releaseEvent:Disconnect()
 					if mouseEvent then mouseEvent:Disconnect() end
 					if checkMouseInGui(scrollThumb) then scrollThumb.BackgroundTransparency = 0.2 else scrollThumb.BackgroundTransparency = 0 scrollThumb.BackgroundColor3 = self.ThumbColor end
@@ -5278,11 +5278,11 @@ local function main()
 				end
 			end)
 
-			newFrame.MouseButton1Down:Connect(function(x,y)
+			newFrame.MouseWheelForward:Connect(function()
 				self:ScrollTo(self.Index - self.WheelIncrement)
 			end)
 
-			newFrame.MouseButton1Down:Connect(function(x,y)
+			newFrame.MouseWheelBackward:Connect(function()
 				self:ScrollTo(self.Index + self.WheelIncrement)
 			end)
 
@@ -5425,7 +5425,7 @@ local function main()
 			obj.Gui = createFrame(obj)
 			obj:Texture({
 				ThumbColor = Color3.fromRGB(60,60,60),
-				ThumbSelectColor = Color3.fromRGB(255,255,255),
+				ThumbSelectColor = Color3.fromRGB(75,75,75),
 				ArrowColor = Color3.new(1,1,1),
 				FrameColor = Color3.fromRGB(40,40,40),
 				ButtonColor = Color3.fromRGB(75,75,75)
@@ -7182,18 +7182,7 @@ local function main()
 						self:UpdateCursor()
 						self:JumpToCursor()
 					end)
-				elseif keycode == keycodes.Right then
-					setupMove(keycodes.Right,function()
-						local line = self.Lines[self.CursorY+1] or ""
-						self.CursorX = self.CursorX + 1 + (line:sub(self.CursorX+1,self.CursorX+4) == tabReplacement and 3 or 0)
-						if self.CursorX > #line then
-							self.CursorY = self.CursorY + 1
-							self.CursorX = 0
-						end
-						self.FloatCursorX = self.CursorX
-						self:UpdateCursor()
-						self:JumpToCursor()
-					end)
+			
 				elseif keycode == keycodes.Backspace then
 					setupMove(keycodes.Backspace,function()
 						local startRange,endRange
