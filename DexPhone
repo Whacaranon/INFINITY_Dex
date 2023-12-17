@@ -5425,7 +5425,7 @@ local function main()
 			obj.Gui = createFrame(obj)
 			obj:Texture({
 				ThumbColor = Color3.fromRGB(60,60,60),
-				ThumbSelectColor = Color3.fromRGB(75,75,75),
+				ThumbSelectColor = Color3.fromRGB(255,255,255),
 				ArrowColor = Color3.new(1,1,1),
 				FrameColor = Color3.fromRGB(40,40,40),
 				ButtonColor = Color3.fromRGB(75,75,75)
