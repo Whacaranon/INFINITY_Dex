@@ -5278,13 +5278,14 @@ local function main()
 				end
 			end)
 
-			newFrame.MouseButton1Click:Connect(function()
+                 newFrame.MouseWheelForward:Connect(function()
 				self:ScrollTo(self.Index - self.WheelIncrement)
 			end)
 
-			newFrame.MouseButton1Click:Connect(function()
+			newFrame.MouseWheelBackward:Connect(function()
 				self:ScrollTo(self.Index + self.WheelIncrement)
 			end)
+
 
 			self.GuiElems.ScrollThumb = scrollThumb
 			self.GuiElems.ScrollThumbFrame = scrollThumbFrame
