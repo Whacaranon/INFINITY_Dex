@@ -5402,8 +5402,8 @@ local function main()
 		funcs.SetScrollFrame = function(self,frame)
 			if self.ScrollUpEvent then self.ScrollUpEvent:Disconnect() self.ScrollUpEvent = nil end
 			if self.ScrollDownEvent then self.ScrollDownEvent:Disconnect() self.ScrollDownEvent = nil end
-			self.ScrollUpEvent = frame.MouseWheelForward:Connect(function() self:ScrollTo(self.Index - self.WheelIncrement) end)
-			self.ScrollDownEvent = frame.MouseWheelBackward:Connect(function() self:ScrollTo(self.Index + self.WheelIncrement) end)
+			self.ScrollUpEvent = frame.Mouse1:Connect(function() self:ScrollTo(self.Index - self.WheelIncrement) end)
+			self.ScrollDownEvent = frame.Mouse1:Connect(function() self:ScrollTo(self.Index + self.WheelIncrement) end)
 		end
 
 		local mt = {}
@@ -10155,7 +10155,7 @@ DefaultSettings = (function()
 			ButtonPress = rgb(255,40,40),
 			Highlight = rgb(75,75,75),
 			Text = rgb(255,255,255),
-			PlaceholderText = rgb(255,255,255),
+			PlaceholderText = rgb(100,100,100),
 			Important = rgb(255,0,0),
 			ExplorerIconMap = "",
 			MiscIconMap = "",
