@@ -848,7 +848,7 @@ local function main()
 	end
 
 	Explorer.ShowRightClick = function()
-		local context = Explorer.RightClickContext
+		local context = Explorer.LeftClickContext
 		context:Clear()
 
 		local sList = selection.List
