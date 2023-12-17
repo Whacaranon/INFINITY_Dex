@@ -5278,11 +5278,11 @@ local function main()
 				end
 			end)
 
-			newFrame.MouseButton1Click:Connect(function()
+			newFrame.MouseEnter:Connect(function()
 				self:ScrollTo(self.Index - self.WheelIncrement)
 			end)
 
-			newFrame.MouseButton1Click:Connect(function()
+			newFrame.MouseLeave:Connect(function()
 				self:ScrollTo(self.Index + self.WheelIncrement)
 			end)
 
@@ -5402,8 +5402,8 @@ local function main()
 		funcs.SetScrollFrame = function(self,frame)
 			if self.ScrollUpEvent then self.ScrollUpEvent:Disconnect() self.ScrollUpEvent = nil end
 			if self.ScrollDownEvent then self.ScrollDownEvent:Disconnect() self.ScrollDownEvent = nil end
-			self.ScrollUpEvent = frame.MouseButton1Click:Connect(function() self:ScrollTo(self.Index - self.WheelIncrement) end)
-			self.ScrollDownEvent = frame.MouseButton1Click:Connect(function() self:ScrollTo(self.Index + self.WheelIncrement) end)
+			self.ScrollUpEvent = frame.MouseWheelForward:Connect(function() self:ScrollTo(self.Index - self.WheelIncrement) end)
+			self.ScrollDownEvent = frame.MouseWheelBackward:Connect(function() self:ScrollTo(self.Index + self.WheelIncrement) end)
 		end
 
 		local mt = {}
