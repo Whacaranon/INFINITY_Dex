@@ -5156,7 +5156,7 @@ local function main()
 				local buttonTick = tick()
 				local releaseEvent
 				releaseEvent = user.InputEnded:Connect(function(input)
-					if input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+					if input.UserInputType ~= Enum.UserInputType.MouseButton1Click then return end
 					releaseEvent:Disconnect()
 					if checkMouseInGui(button1) and self:CanScrollUp() then button1.BackgroundTransparency = 0.8 else button1.BackgroundTransparency = 1 end
 					buttonPress = false
@@ -5172,7 +5172,7 @@ local function main()
 			button1.InputEnded:Connect(function(input)
 				if input.UserInputType == Enum.UserInputType.MouseMovement and not buttonPress then button1.BackgroundTransparency = 1 end
 			end)
-			button2.InputBegan:Connect(function(input)
+			button2.InputEnded:Connect(function(input)
 				if input.UserInputType == Enum.UserInputType.MouseMovement and not buttonPress and self:CanScrollDown() then button2.BackgroundTransparency = 0.8 end
 				if input.UserInputType ~= Enum.UserInputType.MouseButton1 or not self:CanScrollDown() then return end
 				buttonPress = true
@@ -5402,8 +5402,8 @@ local function main()
 		funcs.SetScrollFrame = function(self,frame)
 			if self.ScrollUpEvent then self.ScrollUpEvent:Disconnect() self.ScrollUpEvent = nil end
 			if self.ScrollDownEvent then self.ScrollDownEvent:Disconnect() self.ScrollDownEvent = nil end
-			self.ScrollUpEvent = frame.MouseButton1Up:Connect(function() self:ScrollTo(self.Index - self.WheelIncrement) end)
-			self.ScrollDownEvent = frame.MouseButton1Down:Connect(function() self:ScrollTo(self.Index + self.WheelIncrement) end)
+			self.ScrollUpEvent = frame.MouseWheelForward:Connect(function() self:ScrollTo(self.Index - self.WheelIncrement) end)
+			self.ScrollDownEvent = frame.MouseWheelBackward:Connect(function() self:ScrollTo(self.Index + self.WheelIncrement) end)
 		end
 
 		local mt = {}
@@ -10152,7 +10152,7 @@ DefaultSettings = (function()
 			ListSelection = rgb(11,90,175),
 			Button = rgb(60,60,60),
 			ButtonHover = rgb(68,68,68),
-			ButtonPress = rgb(40,40,40),
+			ButtonPress = rgb(255,40,255),
 			Highlight = rgb(75,75,75),
 			Text = rgb(255,255,255),
 			PlaceholderText = rgb(100,100,100),
