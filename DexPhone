@@ -5278,11 +5278,11 @@ local function main()
 				end
 			end)
 
-			newFrame.MouseEnter:Connect(function()
+			newFrame.MouseButton1Click:Connect(function()
 				self:ScrollTo(self.Index - self.WheelIncrement)
 			end)
 
-			newFrame.MouseLeave:Connect(function()
+			newFrame.MouseButton1Click:Connect(function()
 				self:ScrollTo(self.Index + self.WheelIncrement)
 			end)
 
