@@ -5282,7 +5282,7 @@ local function main()
 				self:ScrollTo(self.Index - self.WheelIncrement)
 			end)
 
-			newFrame.MouseButton1Up:Connect(function()
+			newFrame.MouseButton1Down:Connect(function()
 				self:ScrollTo(self.Index + self.WheelIncrement)
 			end)
 
