@@ -3008,7 +3008,7 @@ local function main()
 		nameFrame.PropName.InputBegan:Connect(function(input)
 			local prop = viewList[index + Properties.Index]
 			if not prop then return end
-			if input.UserInputType == Enum.UserInputType.MouseButton1 and not nameFrame.PropName.TextFits then
+			if input.UserInputType == Enum.UserInputType.MouseMovement and not nameFrame.PropName.TextFits then
 				local fullNameFrame = Properties.FullNameFrame	
 				local nameArr = string.split(prop.Class.."."..prop.Name..(prop.SubName or ""),".")
 				local dispName = prop.DisplayName or nameArr[#nameArr]
@@ -3025,7 +3025,7 @@ local function main()
 		end)
 
 		nameFrame.PropName.InputEnded:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 and Properties.FullNameFrameIndex == index then
+			if input.UserInputType == Enum.UserInputType.MouseMovement and Properties.FullNameFrameIndex == index then
 				Properties.FullNameFrame.Visible = false
 				Properties.FullNameFrameAttach.Disable()
 			end
