@@ -848,7 +848,7 @@ local function main()
 	end
 
 	Explorer.ShowRightClick = function()
-		local context = Explorer.LeftClickContext
+		local context = Explorer.RightClickContext
 		context:Clear()
 
 		local sList = selection.List
@@ -3008,7 +3008,7 @@ local function main()
 		nameFrame.PropName.InputBegan:Connect(function(input)
 			local prop = viewList[index + Properties.Index]
 			if not prop then return end
-			if input.UserInputType == Enum.UserInputType.MouseMovement and not nameFrame.PropName.TextFits then
+			if input.UserInputType == Enum.UserInputType.MouseButton1 and not nameFrame.PropName.TextFits then
 				local fullNameFrame = Properties.FullNameFrame	
 				local nameArr = string.split(prop.Class.."."..prop.Name..(prop.SubName or ""),".")
 				local dispName = prop.DisplayName or nameArr[#nameArr]
@@ -3025,7 +3025,7 @@ local function main()
 		end)
 
 		nameFrame.PropName.InputEnded:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement and Properties.FullNameFrameIndex == index then
+			if input.UserInputType == Enum.UserInputType.MouseButton1 and Properties.FullNameFrameIndex == index then
 				Properties.FullNameFrame.Visible = false
 				Properties.FullNameFrameAttach.Disable()
 			end
@@ -7182,7 +7182,18 @@ local function main()
 						self:UpdateCursor()
 						self:JumpToCursor()
 					end)
-			
+				elseif keycode == keycodes.Right then
+					setupMove(keycodes.Right,function()
+						local line = self.Lines[self.CursorY+1] or ""
+						self.CursorX = self.CursorX + 1 + (line:sub(self.CursorX+1,self.CursorX+4) == tabReplacement and 3 or 0)
+						if self.CursorX > #line then
+							self.CursorY = self.CursorY + 1
+							self.CursorX = 0
+						end
+						self.FloatCursorX = self.CursorX
+						self:UpdateCursor()
+						self:JumpToCursor()
+					end)
 				elseif keycode == keycodes.Backspace then
 					setupMove(keycodes.Backspace,function()
 						local startRange,endRange
