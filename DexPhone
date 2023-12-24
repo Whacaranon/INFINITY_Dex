@@ -1158,7 +1158,7 @@ local function main()
 			Explorer.ForceUpdate()
 		end})
 
-		context:Register("COLLAPSE_ALL",{Name = "Collapse All", OnClick = function()
+		("COLLAPSE_ALL",{Name = "Collapse All", OnClick = function()
 			local sList = selection.List
 
 			local function expand(node)
@@ -5148,7 +5148,7 @@ local function main()
 			--local thumbColor = Color3.new(120/255,120/255,120/255)
 			--local thumbSelectColor = Color3.new(140/255,140/255,140/255)
 			button1.InputBegan:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1 and not buttonPress and self:CanScrollUp() then button1.BackgroundTransparency = 0.8 end
+				if input.UserInputType == Enum.UserInputType.MouseMovement and not buttonPress and self:CanScrollUp() then button1.BackgroundTransparency = 0.8 end
 				if input.UserInputType ~= Enum.UserInputType.MouseButton1 or not self:CanScrollUp() then return end
 				buttonPress = true
 				button1.BackgroundTransparency = 0.5
@@ -5170,10 +5170,10 @@ local function main()
 				end
 			end)
 			button1.InputEnded:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1 and not buttonPress then button1.BackgroundTransparency = 1 end
+				if input.UserInputType == Enum.UserInputType.MouseMovement and not buttonPress then button1.BackgroundTransparency = 1 end
 			end)
 			button2.InputBegan:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1 and not buttonPress and self:CanScrollDown() then button2.BackgroundTransparency = 0.8 end
+				if input.UserInputType == Enum.UserInputType.MouseMovement and not buttonPress and self:CanScrollDown() then button2.BackgroundTransparency = 0.8 end
 				if input.UserInputType ~= Enum.UserInputType.MouseButton1 or not self:CanScrollDown() then return end
 				buttonPress = true
 				button2.BackgroundTransparency = 0.5
@@ -5195,11 +5195,11 @@ local function main()
 				end
 			end)
 			button2.InputEnded:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1 and not buttonPress then button2.BackgroundTransparency = 1 end
+				if input.UserInputType == Enum.UserInputType.MouseMovement and not buttonPress then button2.BackgroundTransparency = 1 end
 			end)
 
 			scrollThumb.InputBegan:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1 and not thumbPress then scrollThumb.BackgroundTransparency = 0.2 scrollThumb.BackgroundColor3 = self.ThumbSelectColor end
+				if input.UserInputType == Enum.UserInputType.MouseMovement and not thumbPress then scrollThumb.BackgroundTransparency = 0.2 scrollThumb.BackgroundColor3 = self.ThumbSelectColor end
 				if input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
 
 				local dir = self.Horizontal and "X" or "Y"
@@ -5223,7 +5223,7 @@ local function main()
 				self:Update()
 
 				mouseEvent = user.InputChanged:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 and thumbPress and releaseEvent.Connected then
+					if input.UserInputType == Enum.UserInputType.MouseMovement and thumbPress and releaseEvent.Connected then
 						local thumbFrameSize = scrollThumbFrame.AbsoluteSize[dir]-scrollThumb.AbsoluteSize[dir]
 						local pos = mouse[dir] - scrollThumbFrame.AbsolutePosition[dir] - mouseOffset
 						if pos > thumbFrameSize then
@@ -5240,7 +5240,7 @@ local function main()
 				end)
 			end)
 			scrollThumb.InputEnded:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1 and not thumbPress then scrollThumb.BackgroundTransparency = 0 scrollThumb.BackgroundColor3 = self.ThumbColor end
+				if input.UserInputType == Enum.UserInputType.MouseMovement and not thumbPress then scrollThumb.BackgroundTransparency = 0 scrollThumb.BackgroundColor3 = self.ThumbColor end
 			end)
 			scrollThumbFrame.InputBegan:Connect(function(input)
 				if input.UserInputType ~= Enum.UserInputType.MouseButton1 or checkMouseInGui(scrollThumb) then return end
@@ -5278,11 +5278,11 @@ local function main()
 				end
 			end)
 
-			newFrame.MouseButton1:Connect(function()
+			newFrame.MouseWheelForward:Connect(function()
 				self:ScrollTo(self.Index - self.WheelIncrement)
 			end)
 
-			newFrame.MouseButton1:Connect(function()
+			newFrame.MouseWheelBackward:Connect(function()
 				self:ScrollTo(self.Index + self.WheelIncrement)
 			end)
 
@@ -5706,7 +5706,7 @@ local function main()
 				end
 			end)
 
-			guiTopBar.Minimize.MouseButton2Click:Connect(function()
+			guiTopBar.Minimize.MouseButton1Click:Connect(function()
 				if self.Closed then return end
 				if not self.Aligned then
 					self:SetMinimized(nil,2)
@@ -11114,6 +11114,8 @@ Main = (function()
 	
 	return Main
 end)()
+
+
 
 -- Start
 Main.Init()
