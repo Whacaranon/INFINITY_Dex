@@ -515,7 +515,7 @@ local function main()
 		local mouseEvent,releaseEvent
 
 		mouseEvent = input.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			if input.UserInputType == Enum.UserInputType.MouseMovement then
 				move()
 			end
 		end)
@@ -556,7 +556,7 @@ local function main()
 
 		newEntry.InputBegan:Connect(function(input)
 			local node = tree[index + Explorer.Index]
-			if not node or selection.Map[node] or input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+			if not node or selection.Map[node] or input.UserInputType ~= Enum.UserInputType.MouseMovement then return end
 
 			newEntry.Indent.BackgroundColor3 = Settings.Theme.Button
 			newEntry.Indent.BorderSizePixel = 0
@@ -565,7 +565,7 @@ local function main()
 
 		newEntry.InputEnded:Connect(function(input)
 			local node = tree[index + Explorer.Index]
-			if not node or selection.Map[node] or input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+			if not node or selection.Map[node] or input.UserInputType ~= Enum.UserInputType.MouseMovement then return end
 
 			newEntry.Indent.BackgroundTransparency = 1
 		end)
@@ -597,7 +597,7 @@ local function main()
 				end)
 
 				mouseEvent = clonerefs(game:GetService("UserInputService")).InputChanged:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					if input.UserInputType == Enum.UserInputType.MouseMovement then
 						local deltaX = mouse.X - startX
 						local deltaY = mouse.Y - startY
 						local dist = math.sqrt(deltaX^2 + deltaY^2)
@@ -613,20 +613,20 @@ local function main()
 			end
 		end)
 
-		newEntry.MouseButton1Down:Connect(function()
+		newEntry.MouseButton2Down:Connect(function()
 
 		end)
 
 		newEntry.Indent.Expand.InputBegan:Connect(function(input)
 			local node = tree[index + Explorer.Index]
-			if not node or input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+			if not node or input.UserInputType ~= Enum.UserInputType.MouseMovement then return end
 
 			Explorer.MiscIcons:DisplayByKey(newEntry.Indent.Expand.Icon, expanded[node] and "Collapse_Over" or "Expand_Over")
 		end)
 
 		newEntry.Indent.Expand.InputEnded:Connect(function(input)
 			local node = tree[index + Explorer.Index]
-			if not node or input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+			if not node or input.UserInputType ~= Enum.UserInputType.MouseMovement then return end
 
 			Explorer.MiscIcons:DisplayByKey(newEntry.Indent.Expand.Icon, expanded[node] and "Collapse" or "Expand")
 		end)
@@ -1158,7 +1158,7 @@ local function main()
 			Explorer.ForceUpdate()
 		end})
 
-		("COLLAPSE_ALL",{Name = "Collapse All", OnClick = function()
+		context:Register("COLLAPSE_ALL",{Name = "Collapse All", OnClick = function()
 			local sList = selection.List
 
 			local function expand(node)
@@ -4668,7 +4668,7 @@ local function main()
 
 		button.InputBegan:Connect(function(input)
 			if disabled then return end
-			if input.UserInputType == Enum.UserInputType.MouseButton1 and not holding then
+			if input.UserInputType == Enum.UserInputType.MouseMovement and not holding then
 				if mode == 1 then
 					button.BackgroundTransparency = 0.4
 				elseif mode == 2 then
@@ -4687,7 +4687,7 @@ local function main()
 
 		button.InputEnded:Connect(function(input)
 			if disabled then return end
-			if input.UserInputType == Enum.UserInputType.MouseButton1 and not holding then
+			if input.UserInputType == Enum.UserInputType.MouseMovement and not holding then
 				if mode == 1 then
 					button.BackgroundTransparency = 1
 				elseif mode == 2 then
@@ -11114,8 +11114,6 @@ Main = (function()
 	
 	return Main
 end)()
-
-
 
 -- Start
 Main.Init()
